@@ -27,7 +27,7 @@ ld-node-facial-landmark-detector-2 --instance-file instance.json
 ## Specification
 
 This node implements the following RFCs:
-- 027
+- https://draive.com/link_dev/rfc/027/README/index.html
 
 ## Contribution
 
