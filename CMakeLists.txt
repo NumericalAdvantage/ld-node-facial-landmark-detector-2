@@ -57,14 +57,14 @@ add_executable(${PROJECT_NAME}
     src/main.cpp
     src/FacialLandmarkDetector.cpp 
     src/FacialLandmarkDetector.h 
-    src/tf_predictor.h 
-    src/tf_predictor.cpp 
-    src/face_transform.h 
-    src/face_transform.cpp
+    src/LandmarkPredictor.h 
+    src/LandmarkPredictor.cpp 
+    src/FaceTransform.h 
+    src/FaceTransform.cpp
     ${FLATC_GENERATED_SOURCES}
     )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${FLATC_GENERATED_INCLUDE_DIRS} PUBLIC ${OpenCV_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PRIVATE ${FLATC_GENERATED_INCLUDE_DIRS} PUBLIC ${OpenCV_INCLUDE_DIRS} ${TF_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PUBLIC DRAIVE::Link2-Cpp ${ld-node-tensorflow-poc_LIBRARIES}  ${TF_LIBS} ${CMAKE_THREAD_LIBS_INIT} link_dev::ld-interface-i2d ${OpenCV_LIBS})
 
 cmake_make_installation(
