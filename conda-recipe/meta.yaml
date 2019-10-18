@@ -11,6 +11,15 @@ package:
 source:
   git_url: ../
 
+build:
+  number: 0
+  detect_binary_files_with_perfix: true
+  features:
+    - {{ COMPILER_FEATURE }}
+    - cuda
+  skip: 
+    true # [aarch64]
+
 requirements:
   build:
     - {{ compiler("c") }}
@@ -18,12 +27,24 @@ requirements:
     - cmake
     - ld-cmake-tools
     - flatc
+    - tensorflow_cc
+    - cuda
+    - cudnn
 
   host:
     - link2-cpp
+    - opencv
+    - ld-interface-i2d
+    - cuda=9.0
+    - cudnn
 
   run:
     - link2
+    - opencv
+    - ld-interface-i2d
+    - cuda=9.0
+    - cudnn
+    - tensorflow_cc
 
 test:
   commands:
