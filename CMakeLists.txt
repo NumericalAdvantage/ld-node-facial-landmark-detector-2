@@ -13,6 +13,35 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Link2-Cpp REQUIRED)
 find_package(Flatc REQUIRED)
 find_package(ld-cmake-tools REQUIRED)
+find_package(ld-interface-i2d REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(TensorflowCC COMPONENTS Shared REQUIRED)
+
+if(TensorflowCC_Shared_FOUND)
+	get_property(TF_LIBS TARGET TensorflowCC::Shared PROPERTY INTERFACE_LINK_LIBRARIES)
+	get_property(TF_INCLUDE_DIRS TARGET TensorflowCC::Shared PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+	message("Tensorflow Libs: ${TF_LIBS}")
+	message("Tensorflow Headers: ${TF_INCLUDE_DIRS}")
+else()
+	message("Tensorflow library NOT FOUND")
+endif()
+
+find_package(CUDA)
+if (CUDA_FOUND)
+  message("CUDA Libs: ${CUDA_LIBRARIES}")
+  message("CUDA Headers: ${CUDA_INCLUDE_DIRS}")
+  set(CUDA_AVAIL ON)
+else()
+  message("CUDA NOT FOUND")
+  set(CUDA_AVAIL OFF)
+endif (CUDA_FOUND)
+
+if (WIN32)
+add_definitions(-DCOMPILER_MSVC)
+endif ()
+
+add_definitions(-DNOMINMAX)
+
 
 # When adding new data formats, add them to the INPUT_FILES section.
 # If you use libraries that contain Flatbuffer files, uncomment the lines with LD_FLATBUFFER_ variables.
@@ -26,11 +55,17 @@ flatc_generate_cpp(
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
+    src/FacialLandmarkDetector.cpp 
+    src/FacialLandmarkDetector.h 
+    src/tf_predictor.h 
+    src/tf_predictor.cpp 
+    src/face_transform.h 
+    src/face_transform.cpp
     ${FLATC_GENERATED_SOURCES}
     )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${FLATC_GENERATED_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PUBLIC DRAIVE::Link2-Cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE ${FLATC_GENERATED_INCLUDE_DIRS} PUBLIC ${OpenCV_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PUBLIC DRAIVE::Link2-Cpp ${ld-node-tensorflow-poc_LIBRARIES}  ${TF_LIBS} ${CMAKE_THREAD_LIBS_INIT} link_dev::ld-interface-i2d ${OpenCV_LIBS})
 
 cmake_make_installation(
         TARGETS ${PROJECT_NAME}

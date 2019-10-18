@@ -28,7 +28,7 @@ requirements:
     - ld-cmake-tools
     - flatc
     - tensorflow_cc
-    - cuda
+    - cuda=9.0
     - cudnn
 
   host:
