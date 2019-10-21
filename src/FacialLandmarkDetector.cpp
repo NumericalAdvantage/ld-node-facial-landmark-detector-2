@@ -6,6 +6,28 @@
 #include "FaceTransform.h"
 #include "LandmarkPredictor.h"
 
+void link_dev::Services::FacialLandmarkDetector::Load_uv_indices(const std::string & filePath) 
+{
+	std::ifstream ifs(filePath);
+	
+	if (!ifs) 
+	{
+		std::cerr << "File not found or failed to open : " << filePath << std::endl;
+	}
+	std::string s;
+	
+	while (ifs >> s) 
+	{
+		uint val = static_cast<uint>(std::stof(s));
+		m_uv_kpt_indices.push_back(val);
+	}
+	
+	if (m_uv_kpt_indices.size() != (2 * 68)) 
+	{
+		std::cerr << "Invalid number of UV values. Must be 2 * 68, but got " << m_uv_kpt_indices.size() << std::endl;
+	}
+}
+
 int link_dev::Services::FacialLandmarkDetector::Run() 
 {
 	m_predictor.loadModel(m_pathToModel, "Placeholder", "resfcn256/Conv2d_transpose_16/Sigmoid");
@@ -15,7 +37,7 @@ int link_dev::Services::FacialLandmarkDetector::Run()
 	std::cout << "UV-DATA is loaded." << std::endl;
 
 	m_inputPin.addOnDataCallback("l2demand:/image_with_bounding_boxes", 
-	[&](const ImageWithBoundingBoxT& imageWithBB) 
+	[&](const ImageWithBoundingBoxT& imageWithBB)
 	{
 		HandleNewFrame(imageWithBB.imageWithFace, imageWithBB.boxes);
 	});
@@ -45,10 +67,10 @@ void link_dev::Services::FacialLandmarkDetector::HandleNewFrame(
 	for(std::vector<BoundingBoxT>::iterator iter = imageBoundingBoxes.begin(); 
 	    iter != imageBoundingBoxes.end(); ++iter)
 	{
-
-		//faceLocations.push_back(cv::Rect(*iter.left, *iter.top, 
-		//                                 *iter.right - *iter.left, *iter.bottom - *iter.top));
-	}
+		faceLocations.push_back(cv::Rect(*iter.left, *iter.top, /*x, y cordinates of top left*/
+		                                 *iter.right - *iter.left, *iter.bottom - *iter.top));
+										/*width, height*/		
+	}	
 
 	if (imageFrame.channels() == 1) 
 	{
@@ -94,35 +116,13 @@ void link_dev::Services::FacialLandmarkDetector::HandleNewFrame(
 	{
 		m_outputPin.push(link_dev::Interfaces::ImageFromOpenCV(imageFrame, 
 		                                                       link_dev::Format::Format_RGB_U8),
-													           "l2offer:/debug_video_output");
+													           "l2offer:/imagesWithLandmarks");
 	}
 	else 
 	{
 		m_outputPin.push(link_dev::Interfaces::ImageFromOpenCV(allFacesLandmarks, 
 			                                                   link_dev::Format::Format_GRAY_U8),
-													           "l2offer:/video_output");
-	}
-}
-
-void link_dev::Services::FacialLandmarkDetector::Load_uv_indices(const std::string & filePath) 
-{
-	std::ifstream ifs(filePath);
-	
-	if (!ifs) 
-	{
-		std::cerr << "File not found or failed to open : " << filePath << std::endl;
-	}
-	std::string s;
-	
-	while (ifs >> s) 
-	{
-		uint val = static_cast<uint>(std::stof(s));
-		m_uv_kpt_indices.push_back(val);
-	}
-	
-	if (m_uv_kpt_indices.size() != (2 * 68)) 
-	{
-		std::cerr << "Invalid number of UV values. Must be 2 * 68, but got " << m_uv_kpt_indices.size() << std::endl;
+													           "l2offer:/imagesWithLandmarks");
 	}
 }
 

@@ -26,7 +26,7 @@
     },
     "user-configuration" : 
     {
-        "Visualize" : true,
+        "Visualize" : false,
         "PathToUVData" : "/home/rgh/autnms/ai/ld-node-facial-landmark-detector-2/uv_kpt_ind.txt",
         "PathToModel" : "/home/rgh/autnms/ai/ld-node-facial-landmark-detector-2/prnet_frozen.pb"
     }
