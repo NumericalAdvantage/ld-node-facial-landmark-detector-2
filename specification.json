@@ -1,12 +1,49 @@
 {
     "file-type" : "link2-node-specification-2",
     "$id": "l2spec:/link_dev/ld-node-facial-landmark-detector-2",
-    "pins" : {
+    "pins" : 
+    {
+        "input_imageWithBoundingBoxes" :
+        {
+            "pin-type" : "input",
+            "demands" :
+            {
+                "l2demand:/image_with_bounding_boxes" :
+                {
+                    "data-type" :
+                    {
+                        "schema-filename" : "data/ImageWithBB.bfbs",
+                        "table-name" : "ImageWithBoundingBox"
+                    }
+                }
+            }
+        },
+
+        "video_output" :
+	    {
+	        "pin-type" : "output",
+            "supplies" : 
+            {
+                "l2offer:/facialLandmarks_superimposed" :
+                {
+                    "data-type" :
+                    {
+                        "schema-filename" : "data/Image.bfbs",
+                        "table-name" : "link_dev.Image"
+                    }
+                }
+            } 
+	    }
     },
     "user-configuration-schema": {
         "$schema": "http://json-schema.org/draft-04/schema#",
         "type": "object",
-        "properties": {},
+        "properties": 
+        {
+            "Visualize" : { "type" : "boolean" },
+            "PathToUVData" : { "type" : "string" },
+            "PathToModel" : { "type" : "string" }
+        },
         "additionalProperties" : false
     }
 }

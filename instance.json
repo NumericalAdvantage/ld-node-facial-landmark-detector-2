@@ -1,7 +1,34 @@
 {
     "file-type" : "link2-node-instance-2",
-    "$id": "l2node:/my-mesh/sample-facial-landmark-detector-2",
+    "$id": "l2node:/link_dev/ld-facial-landmark-detector-2",
     "specification": "l2spec:/link_dev/ld-node-facial-landmark-detector-2",
-    "user-configuration" : {
+    "pins" :
+    {
+        "video_input" :
+        {
+            "subscriptions" : 
+            {
+                "l2demand:/image_with_bounding_boxes" : 
+                [
+                    {
+                        "#" : "l2offer:/image_with_bounding_boxes"
+                    }
+                ]
+            }
+        },
+        "video_output" : 
+        {
+            "offers" : 
+            {
+                "l2offer:/facialLandmarks_superimposed" : ["l2offer:/facialLandmarks_superimposed"]
+            }
+        }
+    },
+    "user-configuration" : 
+    {
+        "Visualize" : true,
+        "PathToUVData" : "/home/rgh/autnms/ai/ld-node-facial-landmark-detector-2/uv_kpt_ind.txt",
+        "PathToModel" : "/home/rgh/autnms/ai/ld-node-facial-landmark-detector-2/prnet_frozen.pb"
     }
+
 }
