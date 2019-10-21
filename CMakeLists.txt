@@ -10,6 +10,10 @@ project(ld-node-facial-landmark-detector-2)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" )
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--unresolved-symbols=ignore-in-shared-libs")
+endif()
+
 find_package(Link2-Cpp REQUIRED)
 find_package(Flatc REQUIRED)
 find_package(ld-cmake-tools REQUIRED)
@@ -65,7 +69,7 @@ add_executable(${PROJECT_NAME}
     ${FLATC_GENERATED_SOURCES}
     )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${FLATC_GENERATED_INCLUDE_DIRS} PUBLIC ${OpenCV_INCLUDE_DIRS} ${TF_INCLUDE_DIRS} ~/miniconda3/share) 
+target_include_directories(${PROJECT_NAME} PRIVATE ${FLATC_GENERATED_INCLUDE_DIRS} PUBLIC ${OpenCV_INCLUDE_DIRS} ${TF_INCLUDE_DIRS}) 
 target_link_libraries(${PROJECT_NAME} PUBLIC DRAIVE::Link2-Cpp ${ld-node-tensorflow-poc_LIBRARIES}  ${TF_LIBS} ${CMAKE_THREAD_LIBS_INIT} link_dev::ld-interface-i2d ${OpenCV_LIBS})
 
 cmake_make_installation(
