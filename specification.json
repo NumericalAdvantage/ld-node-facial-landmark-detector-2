@@ -3,7 +3,7 @@
     "$id": "l2spec:/link_dev/ld-node-facial-landmark-detector-2",
     "pins" : 
     {
-        "input_imageWithBoundingBoxes" :
+        "imagesWithBoundingBox" :
         {
             "pin-type" : "input",
             "demands" :
@@ -19,12 +19,12 @@
             }
         },
 
-        "video_output" :
+        "imagesWithLandmarks" :
 	    {
 	        "pin-type" : "output",
             "supplies" : 
             {
-                "l2offer:/facialLandmarks_superimposed" :
+                "l2offer:/imagesWithLandmarks" :
                 {
                     "data-type" :
                     {
