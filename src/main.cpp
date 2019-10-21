@@ -6,32 +6,35 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-#include <iostream>
-#include <DRAIVE/Link2/NodeDiscovery.hpp>
-#include <DRAIVE/Link2/NodeResources.hpp>
-#include <DRAIVE/Link2/SignalHandler.hpp>
+#include "FacialLandmarkDetector.h"
 
 int main(int argc, char** argv)
 {
-    try {
-        // load the node resources for our subscriber
-        DRAIVE::Link2::NodeResources nodeResources { "l2spec:/link_dev/ld-node-facial-landmark-detector-2", argc, argv };
-        
-        // announce that our node is "online"
+    try 
+    {
+        DRAIVE::Link2::NodeResources nodeResources { "l2spec:/link_dev/ld-node-facial-landmark-detector-2", 
+                                                      argc, argv };
         DRAIVE::Link2::NodeDiscovery nodeDiscovery { nodeResources };
-        
-        // create a blocking signal handler
+
+        DRAIVE::Link2::ConfigurationNode rootNode = nodeResources.getUserConfiguration();
+        DRAIVE::Link2::OutputPin outputPin{nodeDiscovery, nodeResources, "imagesWithLandmarks"};
+        DRAIVE::Link2::InputPin inputPin{nodeDiscovery, nodeResources, "imagesWithBoundingBox"};
+
         DRAIVE::Link2::SignalHandler signalHandler {};
         signalHandler.setReceiveSignalTimeout(-1);
         
-        // if signal is not shutdown
-        while (signalHandler.receiveSignal() != LINK2_SIGNAL_INTERRUPT)
-            ;
-        
-        return 0;
-        
-    } catch (const std::exception& e) {
+        link_dev::Services::FacialLandmarkDetector fLDetector(signalHandler, nodeResources, 
+		                                                      nodeDiscovery, outputPin, inputPin,
+                                                              rootNode.getBoolean("Visualize"),
+                                                              rootNode.getString("PathToUVData"),
+                                                              rootNode.getString("PathToModel"));
+
+        return fLDetector.Run();
+    } 
+    catch (const std::exception& e) 
+    {
         std::cerr << e.what() << std::endl;
         return 1;
     }
 }
+

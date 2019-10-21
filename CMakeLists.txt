@@ -7,13 +7,14 @@
 cmake_minimum_required(VERSION 3.0)
 project(ld-node-facial-landmark-detector-2)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Link2-Cpp REQUIRED)
 find_package(Flatc REQUIRED)
 find_package(ld-cmake-tools REQUIRED)
 find_package(ld-interface-i2d REQUIRED)
+find_package(ld-lib-image REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(TensorflowCC COMPONENTS Shared REQUIRED)
 
@@ -47,24 +48,24 @@ add_definitions(-DNOMINMAX)
 # If you use libraries that contain Flatbuffer files, uncomment the lines with LD_FLATBUFFER_ variables.
 flatc_generate_cpp(
     BFBS_OUTPUT_FOLDER ${CMAKE_SOURCE_DIR}/data
-    #INCLUDE_PATHS ${LD_FLATBUFFER_DATA_FOLDERS}
+    INCLUDE_PATHS ${LD_FLATBUFFER_DATA_FOLDERS} 
     INPUT_FILES
-        #${LD_FLATBUFFER_FILES}
-        #data/myDataFile.fbs
+        ${LD_FLATBUFFER_FILES}
+        data/ImageWithBB.fbs
     )
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
-    src/FacialLandmarkDetector.cpp 
-    src/FacialLandmarkDetector.h 
-    src/LandmarkPredictor.h 
-    src/LandmarkPredictor.cpp 
-    src/FaceTransform.h 
+    src/FacialLandmarkDetector.cpp
+    src/FacialLandmarkDetector.h
+    src/LandmarkPredictor.h
+    src/LandmarkPredictor.cpp
+    src/FaceTransform.h
     src/FaceTransform.cpp
     ${FLATC_GENERATED_SOURCES}
     )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${FLATC_GENERATED_INCLUDE_DIRS} PUBLIC ${OpenCV_INCLUDE_DIRS} ${TF_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PRIVATE ${FLATC_GENERATED_INCLUDE_DIRS} PUBLIC ${OpenCV_INCLUDE_DIRS} ${TF_INCLUDE_DIRS} ~/miniconda3/share) 
 target_link_libraries(${PROJECT_NAME} PUBLIC DRAIVE::Link2-Cpp ${ld-node-tensorflow-poc_LIBRARIES}  ${TF_LIBS} ${CMAKE_THREAD_LIBS_INIT} link_dev::ld-interface-i2d ${OpenCV_LIBS})
 
 cmake_make_installation(
