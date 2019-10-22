@@ -34,14 +34,14 @@ requirements:
   host:
     - link2-cpp
     - opencv
-    - ld-interface-i2d
+    - ld-lib-image
     - cuda=9.0
     - cudnn
 
   run:
     - link2
     - opencv
-    - ld-interface-i2d
+    - ld-lib-image
     - cuda=9.0
     - cudnn
     - tensorflow_cc
