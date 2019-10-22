@@ -67,8 +67,8 @@ void link_dev::Services::FacialLandmarkDetector::HandleNewFrame(
 	for(std::vector<BoundingBoxT>::iterator iter = imageBoundingBoxes.begin(); 
 	    iter != imageBoundingBoxes.end(); ++iter)
 	{
-		faceLocations.push_back(cv::Rect(*iter.left, *iter.top, /*x, y cordinates of top left*/
-		                                 *iter.right - *iter.left, *iter.bottom - *iter.top));
+		faceLocations.push_back(cv::Rect(iter->left, iter->top, /*x, y cordinates of top left*/
+		                                 iter->right - iter->left, iter->bottom - iter->top));
 										/*width, height*/		
 	}	
 

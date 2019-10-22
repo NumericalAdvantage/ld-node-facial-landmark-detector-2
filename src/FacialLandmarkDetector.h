@@ -1,4 +1,5 @@
-#pragma once
+#ifndef FACIAL_LANDMARK_DETECTOR_HPP
+#define FACIAL_LANDMARK_DETECTOR_HPP
 
 /*
 #include <link_dev/Data/Imaging/Image2D.pb.h>
@@ -67,3 +68,5 @@ namespace link_dev
 	}
 
 }
+
+#endif
