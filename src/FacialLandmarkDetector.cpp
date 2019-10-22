@@ -1,4 +1,12 @@
+/*
+ * This file is part of project link.developers/ld-node-facial-landmark-detector-2.
+ * It is copyrighted by the contributors recorded in the version control history of the file,
+ * available from its original location https://gitlab.com/link.developers.beta/ld-node-facial-landmark-detector-2.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
 
+ 
 #include <opencv2/highgui.hpp>
 #include <link_dev/Interfaces/OpenCvToImage.h> 
 

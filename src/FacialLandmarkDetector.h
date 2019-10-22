@@ -1,12 +1,14 @@
+/*
+ * This file is part of project link.developers/ld-node-facial-landmark-detector-2.
+ * It is copyrighted by the contributors recorded in the version control history of the file,
+ * available from its original location https://gitlab.com/link.developers.beta/ld-node-facial-landmark-detector-2.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 #ifndef FACIAL_LANDMARK_DETECTOR_HPP
 #define FACIAL_LANDMARK_DETECTOR_HPP
 
-/*
-#include <link_dev/Data/Imaging/Image2D.pb.h>
-#include <link_dev/Data/Math/List_Tuple_UInt64_UInt64.pb.h>
-#include <link_dev/Data/Math/GenericMatrix3D.pb.h>
-#include <link_dev/Data/Imaging/Image2D_Plus_Points.pb.h>
-*/
 #include <iostream>
 #include <DRAIVE/Link2/NodeDiscovery.hpp>
 #include <DRAIVE/Link2/NodeResources.hpp>
