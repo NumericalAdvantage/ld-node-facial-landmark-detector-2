@@ -18,6 +18,7 @@ find_package(Link2-Cpp REQUIRED)
 find_package(Flatc REQUIRED)
 find_package(ld-cmake-tools REQUIRED)
 find_package(ld-lib-image REQUIRED)
+find_package(ld-interface-i2d REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(TensorflowCC COMPONENTS Shared REQUIRED)
 
@@ -69,7 +70,7 @@ add_executable(${PROJECT_NAME}
     )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${FLATC_GENERATED_INCLUDE_DIRS} PUBLIC ${OpenCV_INCLUDE_DIRS} ${TF_INCLUDE_DIRS}) 
-target_link_libraries(${PROJECT_NAME} PUBLIC DRAIVE::Link2-Cpp ${ld-node-tensorflow-poc_LIBRARIES}  ${TF_LIBS} ${CMAKE_THREAD_LIBS_INIT} ${OpenCV_LIBS})
+target_link_libraries(${PROJECT_NAME} PUBLIC DRAIVE::Link2-Cpp ${ld-node-tensorflow-poc_LIBRARIES} ${TF_LIBS} ${CMAKE_THREAD_LIBS_INIT} ${OpenCV_LIBS} link_dev::ld-interface-i2d)
 
 cmake_make_installation(
         TARGETS ${PROJECT_NAME}

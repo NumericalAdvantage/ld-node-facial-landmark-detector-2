@@ -6,7 +6,7 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
- 
+
 #include <opencv2/highgui.hpp>
 #include <link_dev/Interfaces/OpenCvToImage.h> 
 
@@ -15,7 +15,7 @@
 #include "LandmarkPredictor.h"
 
 void link_dev::Services::FacialLandmarkDetector::Load_uv_indices(const std::string & filePath) 
-{
+{	
 	std::ifstream ifs(filePath);
 	
 	if (!ifs) 
@@ -128,7 +128,7 @@ void link_dev::Services::FacialLandmarkDetector::HandleNewFrame(
 	}
 	else 
 	{
-		m_outputPin.push(link_dev::Interfaces::ImageFromOpenCV(allFacesLandmarks, 
+		m_outputPin.push(link_dev::Interfaces::ImageFromOpenCV(allFacesLandmarks,
 			                                                   link_dev::Format::Format_GRAY_U8),
 													           "l2offer:/imagesWithLandmarks");
 	}
