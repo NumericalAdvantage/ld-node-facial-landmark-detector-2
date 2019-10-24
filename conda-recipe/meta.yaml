@@ -29,15 +29,14 @@ requirements:
     - ld-data-protobuf
     - flatc
     - tensorflow_cc
-    - cuda=9.0
-    - cudnn
 
   host:
     - link2-cpp
     - opencv
     - ld-lib-image
     - ld-interface-i2d
-  
+    - cuda=9.0
+    - cudnn
 
   run:
     - link2
