@@ -44,8 +44,6 @@ requirements:
     - ld-lib-image
     - ld-interface-i2d
     - ld-data-protobuf
-    - cuda=9.0
-    - cudnn
     - tensorflow_cc
 
 test:
