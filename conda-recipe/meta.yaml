@@ -29,8 +29,6 @@ requirements:
     - ld-data-protobuf
     - flatc
     - tensorflow_cc
-    - cuda=9.0
-    - cudnn
 
   host:
     - link2-cpp
