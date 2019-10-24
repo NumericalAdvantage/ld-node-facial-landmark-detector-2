@@ -38,3 +38,11 @@ int main(int argc, char** argv)
     }
 }
 
+/*
+References:
+[1]  https://github.com/YadiraF/PRNet
+[2]  https://github.com/lighttransport/prnet-infer/blob/master/README.md
+[3]  https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
+[4]  https://medium.com/coinmonks/tensorflow-graphs-and-sessions-c7fa116209db 
+[5]  https://danijar.com/what-is-a-tensorflow-session/
+*/

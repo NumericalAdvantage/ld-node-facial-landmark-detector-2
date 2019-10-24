@@ -11,7 +11,6 @@
 
 cv::Point2f FaceTransform::getCenter(const int left, const int top, const int right, const int bottom) 
 {
-	//TODO - reduce 4 lines to 1.
 	int old_size = (right - left + bottom - top) / 2.0f;
 	cv::Point2f center;
 	center.x = right - (right - left) / 2.f;
@@ -21,7 +20,6 @@ cv::Point2f FaceTransform::getCenter(const int left, const int top, const int ri
 
 cv::Mat FaceTransform::getTransformMatrix(const cv::Point2f center, const float size) 
 {
-	//TODO - Reduce lines.
 	std::vector<cv::Point2f> srcPts;
 	std::vector<cv::Point2f> dstPts;
 	cv::Mat transMat(2, 3, CV_32F);
@@ -48,7 +46,7 @@ cv::Mat FaceTransform::crop(const cv::Mat& image, const cv::Mat& transform_Matri
 	return roi;
 }
 
-void FaceTransform::drawLandmarks(cv::Mat & image, const cv::Mat & landmarks) 
+void FaceTransform::drawLandmarks(cv::Mat& image, const cv::Mat& landmarks) 
 {
 	for (int i = 0; i < landmarks.rows; i++) 
 	{
@@ -75,7 +73,6 @@ cv::Mat FaceTransform::transformBack(cv::Mat& trans_Matrix, const std::vector<fl
 	{
 		cv::Mat origin_landmark(1, 3, CV_32SC1);
 		origin_landmark.at<int>(0,2) = int(landmarks[i+2] / trans_Matrix.at<double>(cv::Point(0, 0)));
-		//std::cout << origin_landmarks[i + 2] << std::endl;
 		cv::Mat old_pt = cv::Mat::zeros(3, 1, CV_64F);
 		old_pt.at<double>(0, 0) = landmarks[i];
 		old_pt.at<double>(1, 0) = landmarks[i+1];
@@ -86,5 +83,6 @@ cv::Mat FaceTransform::transformBack(cv::Mat& trans_Matrix, const std::vector<fl
 		origin_landmarks.push_back(origin_landmark);
 	}
 	
+	/*TODO Return by reference*/
 	return origin_landmarks;
 }

@@ -13,6 +13,7 @@ bool LandmarkPredictor::loadModel(const std::string& graph_filename,
 								  const std::string& out_layer) 
 {
 	tensorflow::GraphDef graph_def;
+	/*Read the protobuf graph supplied by user*/
 	Status load_graph_status = ReadBinaryProto(tensorflow::Env::Default(), graph_filename, &graph_def);
 	if (!load_graph_status.ok()) 
 	{
@@ -20,6 +21,7 @@ bool LandmarkPredictor::loadModel(const std::string& graph_filename,
 		return false;
 	}
 
+	/*Create a tensorflow::session to execute the above graph*/
 	session.reset(tensorflow::NewSession(tensorflow::SessionOptions()));
 	Status session_create_status = session->Create(graph_def);
 	if (!session_create_status.ok()) 
@@ -48,6 +50,7 @@ Tensor LandmarkPredictor::predict(const Tensor & input_tensor)
 	return output_tensors[0];
 }
 
+/*TODO Explain What happens in this function and why*/
 std::vector<float> LandmarkPredictor::getLandmarks(const Tensor& result, 
                                                    const std::vector<uint>& uv_kpt_indices) 
 {
@@ -66,6 +69,7 @@ std::vector<float> LandmarkPredictor::getLandmarks(const Tensor& result,
 		landmarks.push_back(real_z);
 	}
 	
+	//TODO Return By reference
 	return landmarks;
 }
 
