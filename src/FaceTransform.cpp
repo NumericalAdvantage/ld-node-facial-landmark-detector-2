@@ -83,6 +83,5 @@ cv::Mat FaceTransform::transformBack(cv::Mat& trans_Matrix, const std::vector<fl
 		origin_landmarks.push_back(origin_landmark);
 	}
 	
-	/*TODO Return by reference*/
 	return origin_landmarks;
 }

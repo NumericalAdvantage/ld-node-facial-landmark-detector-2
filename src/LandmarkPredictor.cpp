@@ -69,7 +69,6 @@ std::vector<float> LandmarkPredictor::getLandmarks(const Tensor& result,
 		landmarks.push_back(real_z);
 	}
 	
-	//TODO Return By reference
 	return landmarks;
 }
 

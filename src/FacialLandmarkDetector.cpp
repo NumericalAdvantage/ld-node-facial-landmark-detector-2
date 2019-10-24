@@ -13,8 +13,6 @@
 #include "FaceTransform.h"
 #include "LandmarkPredictor.h"
 
-/*TODO What are these idices and why we need them. What is the source of these indices used 
-in this node*/
 void link_dev::Services::FacialLandmarkDetector::Load_uv_indices(const std::string & filePath) 
 {	
 	std::ifstream ifs(filePath);
