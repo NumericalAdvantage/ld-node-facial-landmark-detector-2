@@ -26,6 +26,7 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
     - ld-cmake-tools
+    - ld-data-protobuf
     - flatc
     - tensorflow_cc
     - cuda=9.0
@@ -44,6 +45,7 @@ requirements:
     - opencv
     - ld-lib-image
     - ld-interface-i2d
+    - ld-data-protobuf
     - cuda=9.0
     - cudnn
     - tensorflow_cc
