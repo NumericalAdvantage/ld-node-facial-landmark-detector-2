@@ -15,9 +15,8 @@
 #include <DRAIVE/Link2/SignalHandler.hpp>
 #include <DRAIVE/Link2/OutputPin.hpp>
 #include <DRAIVE/Link2/InputPin.hpp>
-
-#include "ImageWithBB_generated.h"
-
+#include "Image_generated.h"
+#include "ImageWithBoundingBoxes_generated.h"
 #include "FaceTransform.h"
 #include "LandmarkPredictor.h"
 

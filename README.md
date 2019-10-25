@@ -9,20 +9,21 @@
 ```
 //Contains an Image and one or more set(s) of co-ordinates that define a bounding box 
 //inside the image.
-table ImageWithBoundingBox
+table ImageWithBoundingBoxes
 {
-    imageWithFace : link_dev.Image;
-    boxes : [BoundingBox];
+    imageWithFace : link_dev.Image;  //Image in which the bounding boxes have been defined.
+    boxes : [BoundingBox];           //An array of bounding boxes. 
+    numBoundingBoxes : int;          //Number of bounding boxes.
 }
 ```
 where BoundingBox is basically:
 ```
 table BoundingBox
 {
-    left : int32;
-    top : int32;
-    right : int32;
-    bottom : int32;
+    x_coordinate : int32; //x co-ordinate of top left corner of the bounding box.
+    y_coordinate : int32; //y co-ordinate of top left corner of the bounding box.
+    width : int32;        //width of the bounding box.
+    height : int32;       //height of the bounding box.
 }
 
 ```

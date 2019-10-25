@@ -8,7 +8,7 @@
 
 #include <opencv2/highgui.hpp>
 #include <link_dev/Interfaces/OpenCvToImage.h> 
-
+#include "ImageWithBoundingBoxes_generated.h"
 #include "FacialLandmarkDetector.h"
 #include "FaceTransform.h"
 #include "LandmarkPredictor.h"
@@ -46,7 +46,7 @@ int link_dev::Services::FacialLandmarkDetector::Run()
 	std::cout << "UV-DATA is loaded." << std::endl;
 
 	m_inputPin.addOnDataCallback("l2demand:/image_with_bounding_boxes", 
-	[&](const ImageWithBoundingBoxT& imageWithBB)
+	[&](const ImageWithBoundingBoxesT& imageWithBB)
 	{
 		HandleNewFrame(imageWithBB.imageWithFace, imageWithBB.boxes);
 	});
@@ -79,9 +79,8 @@ void link_dev::Services::FacialLandmarkDetector::HandleNewFrame(
 	for(std::vector<BoundingBoxT>::iterator iter = imageBoundingBoxes.begin(); 
 	    iter != imageBoundingBoxes.end(); ++iter)
 	{
-		faceLocations.push_back(cv::Rect(iter->left, iter->top, /*x, y cordinates of top left*/
-		                                 iter->right - iter->left, iter->bottom - iter->top));
-										/*width, height*/		
+		faceLocations.push_back(cv::Rect(iter->x_coordinate, iter->y_coordinate, 
+		                                 iter->width, iter->height));
 	}
 
 	if (imageFrame.channels() == 1) 
