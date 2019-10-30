@@ -51,12 +51,12 @@ Tensor LandmarkPredictor::predict(const Tensor & input_tensor)
 }
 
 /*TODO Explain What happens in this function and why*/
-std::vector<float> LandmarkPredictor::getLandmarks(const Tensor& result, 
+std::vector<float> LandmarkPredictor::getLandm	arks(const Tensor& result, 
                                                    const std::vector<uint>& uv_kpt_indices) 
 {
 	std::vector<float> landmarks;
 	TTypes<float, 4>::ConstTensor tensor = result.tensor<float, 4>();
-	
+
 	for (int i = 0; i < (uv_kpt_indices.size() / 2); i++) 
 	{
 		uint x_idx = uv_kpt_indices[i];

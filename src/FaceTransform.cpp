@@ -68,8 +68,8 @@ cv::Mat FaceTransform::transformBack(cv::Mat& trans_Matrix, const std::vector<fl
 	third_row.at<double>(0,2) = 1;
 	trans_Matrix.push_back(third_row);
 	cv::Mat inv_transMat = trans_Matrix.inv();
-	
-	for (int i = 0; i < landmarks.size(); i = i + 3) 
+
+	for (int i = 0; i < landmarks.size(); i = i + 3)
 	{
 		cv::Mat origin_landmark(1, 3, CV_32SC1);
 		origin_landmark.at<int>(0,2) = int(landmarks[i+2] / trans_Matrix.at<double>(cv::Point(0, 0)));

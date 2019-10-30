@@ -29,7 +29,6 @@ requirements:
     - link2-cpp
     - opencv
     - ld-lib-image
-    - ld-interface-i2d
     - cuda=9.0
     - cudnn
 
@@ -37,7 +36,6 @@ requirements:
     - link2
     - opencv
     - ld-lib-image
-    - ld-interface-i2d
     - ld-data-protobuf
     - tensorflow_cc
     - cuda=9.0

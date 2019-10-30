@@ -50,7 +50,7 @@ table BoundingBox
 ## Configuration Parameters
 - `Visualize` - boolean - Determines if the detected facial key points should be output as superimposed on the image or not.
 - `PathToUVData` - string - Path to the location of uv_indices data file which is obtained from [this project](https://github.com/YadiraF/PRNet). 
-- `PathToModel` - string - Path to the prebuilt model file in form of protobuf file which is most likely obtained using [this project](https://github.com/YadiraF/PRNet) or its [C++ port](https://github.com/lighttransport/prnet-infer).
+- `PathToModel` - string - Path to the prebuilt model file in form of protobuf file which is most likely obtained using [this project](https://github.com/YadiraF/PRNet)[1] or its [C++ port](https://github.com/lighttransport/prnet-infer)[2].
 
 ## Installation
 
@@ -76,9 +76,6 @@ Your help is very much appreciated. For more information, please see our [contri
 ## References
 - [1]  https://github.com/YadiraF/PRNet
 - [2]  https://github.com/lighttransport/prnet-infer/blob/master/README.md
-- [3]  https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
-- [4]  https://medium.com/coinmonks/tensorflow-graphs-and-sessions-c7fa116209db 
-- [5]  https://danijar.com/what-is-a-tensorflow-session/
 
 ## Maintainers
 
