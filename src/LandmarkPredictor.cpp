@@ -51,7 +51,7 @@ Tensor LandmarkPredictor::predict(const Tensor & input_tensor)
 }
 
 /*TODO Explain What happens in this function and why*/
-std::vector<float> LandmarkPredictor::getLandm	arks(const Tensor& result, 
+std::vector<float> LandmarkPredictor::getLandmarks(const Tensor& result, 
                                                    const std::vector<uint>& uv_kpt_indices) 
 {
 	std::vector<float> landmarks;

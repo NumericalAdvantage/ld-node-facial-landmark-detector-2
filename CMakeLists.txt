@@ -21,6 +21,7 @@ find_package(ld-data-protobuf REQUIRED)
 find_package(ld-lib-image REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(TensorflowCC COMPONENTS Shared REQUIRED)
+find_dependency(protobuf CONFIG REQUIRED)
 
 if(TensorflowCC_Shared_FOUND)
 	get_property(TF_LIBS TARGET TensorflowCC::Shared PROPERTY INTERFACE_LINK_LIBRARIES)
@@ -60,7 +61,7 @@ add_executable(${PROJECT_NAME}
     )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${FLATC_GENERATED_INCLUDE_DIRS} PUBLIC ${OpenCV_INCLUDE_DIRS} ${TF_INCLUDE_DIRS}) 
-target_link_libraries(${PROJECT_NAME} PUBLIC DRAIVE::Link2-Cpp ${ld-node-tensorflow-poc_LIBRARIES} ${TF_LIBS} ${CMAKE_THREAD_LIBS_INIT} ${OpenCV_LIBS} link_dev::ld-lib-image)
+target_link_libraries(${PROJECT_NAME} PUBLIC DRAIVE::Link2-Cpp ${ld-node-tensorflow-poc_LIBRARIES} ${TF_LIBS} ${CMAKE_THREAD_LIBS_INIT} ${OpenCV_LIBS} protobuf::libprotobuf link_dev::ld-lib-image)
 
 cmake_make_installation(
         TARGETS ${PROJECT_NAME}
